@@ -22,4 +22,5 @@ def reiniciar_variable(suma_aprox : float, termino : float, error : float) -> tu
     suma_aprox = 0
     termino = -1
     error = None
+    
     return suma_aprox, termino, error

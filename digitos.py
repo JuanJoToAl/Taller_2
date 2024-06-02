@@ -68,8 +68,8 @@ def separar_decimas(parte_decimal : float, digitos_decimal : list,
     if parte_decimal < 0:
         # Se convierte la parte decimal en un número positivo
         parte_decimal = parte_decimal * -1
-        while parte_decimal > 0:
 
+        while parte_decimal > 0:
             # Se extrae el decimal más grande de la variable
             digito = int(parte_decimal * 10 // 1)
 
