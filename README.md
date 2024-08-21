@@ -16,102 +16,36 @@
 
 1. Desarrollar un programa que ingrese un número entero n y separe todos los digitos que componen el número. **Pista:** Utilice los operadores módulo (%) y división entera (//).
   ```python
-def separar_entero(parte_entera : float, digitos_entero : list) -> list:
-    """
-    Esta función separa los dígitos de una parte entera de un 
-    número flotante y los almacena en una lista.
-    
-    Args:
-        parte_entera (float): Representa la parte entera de un número 
-        de punto flotante. 
-
-        digitos_entero (list): Es una lista que almacenará los dígitos
-        individuales de la parte entera de un número. 
-    
-    Returns:
-    Se devuelve una lista que contiene los dígitos de la entrada 
-    `parte_entera` (que es un flotante que representa la parte entera 
-    de un número). 
-    """
-
-    if parte_entera < 0:
-        # Se convierte la parte entera en un número positivo
-        parte_entera = parte_entera * -1
-    
-        while parte_entera > 0:
-            # Se extrae el entero más grande de la variable
-            digito = int(parte_entera % 10)
-
-            # Se añade el entero al primer puesto de la lista
-            digitos_entero.insert(0, digito)
-
-            # Se actualiza el valor de la variable 
-            parte_entera //= 10
-
-    else:
-        while parte_entera > 0:
-            # Se extrae el entero más grande de la variable
-            digito = int(parte_entera % 10)
-
-            # Se añade el entero al primer puesto de la lista
-            digitos_entero.insert(0, digito)
-
-            # Se actualiza el valor de la variable 
-            parte_entera //= 10
-
-    return digitos_entero
-
-def separar_decimas(parte_decimal : float, digitos_decimal : list, 
-                    presicion : int) -> list:
-    """
-    La función toma una parte decimal, una lista para almacenar los dígitos 
-    decimales y un valor de precisión, y separa la parte decimal en dígitos 
-    individuales.
-    
-    Args:
-        parte_decimal (float): Representa la parte decimal de un número. 
-
-        digitos_decimal (list): Es una lista que almacenará los dígitos
-        individuales de la parte decimal de un número. 
-
-        presicion (int): Es un número entero que representa el número de 
-        decimales a considerar al extraer la parte decimal del input 
-        `parte_decimal`. 
-
-    Returns:
-    Se devuelve una lista que contiene los dígitos individuales de la parte
-    decimal de un número determinado. 
-    """
-
-    if parte_decimal < 0:
-        # Se convierte la parte decimal en un número positivo
-        parte_decimal = parte_decimal * -1
-
-        while parte_decimal > 0:
-            # Se extrae el decimal más grande de la variable
-            digito = int(parte_decimal * 10 // 1)
-
-            # Se añade el decimal a la lista
-            digitos_decimal.append(digito)  
-
-            # Se actualiza el valor de la variable 
-            parte_decimal = float(f"{parte_decimal * 10 % 1:.{presicion}f}")
-
-    else:
-        while parte_decimal > 0:
-            # Se extrae el decimal más grande de la variable
-            digito = int(parte_decimal * 10 // 1)
-
-            # Se añade el decimal a la lista
-            digitos_decimal.append(digito)  
-            
-            # Se actualiza el valor de la variable 
-            parte_decimal = float(f"{parte_decimal * 10 % 1:.{presicion}f}")
-
-    return digitos_decimal
+# Punto 1
+#Se toma el número
+numero=int(input("Ingrese el número "))
+#Se determina una variable ´base´que nos ayudará a determinar cuántos dígitos tendrá el número
+base=10
+#Se crea una lista para añadir los dígitos
+lista=[]
+#Para simplificar, se imprime el número directamente si es menor a 10
+if base>numero:
+    lista.append(numero)
+    print("El dígito del número es "+str(lista))
+#Si no es de un dígito, se multiplica la base por 10 hasta que sea igual o mayor a el número inscrito
+else:
+    while base<=numero:
+          base=base*10
+#Ahora, se divide el número en la base exactamente, se añade el número a la lista, se le quita el dígito al número y se divide en 10 la base, hasta que la base llegue a 1, lo que significa que es el último dígito
+    while base>=1:
+          dig=numero//base
+          lista.append(dig)
+          numero=numero-(dig*base)
+          base=base/10
+#De esta manera, siempre da un 0 como primer dígito, entonces se elimina de la lista antes de imprimirla
+    lista.pop(0)
+    print("Los dígitos del número son:")
+    print(lista)
 ``` 
+
 2. Desarrollar un programa que ingrese un número flotante n y separe su parte entera de la parte decimal, y luego entregue los dígitos tanto de la parte entera como de la decimal.
  ```python
+# Punto 2
 # Se importan módulos para calcular los dígitos de los números
 from digitos import *
 
@@ -179,6 +113,7 @@ try:
 except ValueError:
     print("Entrada inválida, por favor intente de nuevo")
 ```    
+
 3. Desarrollar un programa que permita ingresar dos números enteros y determinar si se tratan de números espejos, definiendo números espejos como dos números a y b tales que a se lee de izquierda a derecha igual que se lee b de derecha a izquierda, y viceversa.
 
  ```python
@@ -239,7 +174,9 @@ else:
 
 4. Diseñar una función que permita calcular una aproximación de la función coseno alrededor de 0 para cualquier valor x (real), utilizando los primeros n términos de la serie de Taylor. **nota:** use *math* para traer la función coseno y mostrar la diferencia entre el valor real y la aproximación. Calcule con cuántos términos de la serie (i.e: cuáles valores de n), se tienen errores del 10%, 1%, 0.1% y 0.001%.
 $$cos(x) \approx cos(x,n) \approx \sum_{i=0}^{n} (-1)^i \frac{x^{2i}}{(2i)!}$$
+
  ```python
+# Punto 4
 # Importamos módulo math para cacular valor real de coseno
 import math
 
@@ -328,6 +265,7 @@ try:
 except ValueError:
     print("Entrada inválida, por favor intente de nuevo")
 ``` 
+
 5. Desarrollar un programa que permita determinar el Minimo Comun Multiplo de dos numeros enteros. Abordar el problema desde una perpectiva tanto iterativa como recursiva. **Pista:** Puede ser de utilidad chequear el [Algoritmo de Euclides](https://es.wikipedia.org/wiki/Algoritmo_de_Euclides) para el cálculo del Máximo Común Divisor, y revisar cómo se relaciona este último con el Mínimo Común Múltiplo.
 
  ```python
@@ -699,6 +637,7 @@ if __name__ == "__main__":
 10. Suponga que se tiene una lista A con ciertos números enteros. Desarrolle una función que, independientemente de los números que se encuentran en la lista A, tome aquellos números que son múltiplos de 3 y los guarde en una lista nueva, la cual debe ser **retornada** por la función. Implemente la perspectiva de un *patrón de acumulación* y también de *comprensión de listas*. **Desafío:** Si ya lo logró, inténtelo ahora sin utilizar el módulo (%). **Pista:** Un número es multiplo de 3 si la suma de sus dígitos también lo es, ¿verdad?
     
  ```python
+# Punto 10
 # Se declara e inicializa la lista
 lista_numeros : list = []
 # Se declaran la lista
@@ -813,8 +752,12 @@ print(f"Lista con los números ingresados múltiplos de 3 (sin usar el módulo):
 ```
 
 ### Bono
-11. Desarrollar un algoritmo que determine si una matriz es mágica. Se dice que una matriz cuadrada es mágica si la suma de cada una de sus filas, de cada una de sus columnas y de cada diagonal es igual.
+11. Desarrollar un algoritmo que determine si una matriz es mágica. Se dice que
+    una matriz cuadrada es mágica si la suma de cada una de sus filas, de cada
+    una de sus columnas y de cada diagonal es igual.
+
  ```python
+# Punto 11
 # Se importa chain para comprobar si la matriz tiene elementos repetidos 
 from itertools import chain
 
@@ -870,7 +813,6 @@ def llenar_matriz(matriz : list, num_filas_columnas : int, filas : list) -> list
 
     return matriz
 
-
 def elementos_diferentes(matriz : list, bandera : bool) -> bool:
     """
     La función verifica si una matriz bidimensional contiene elementos 
@@ -888,14 +830,16 @@ def elementos_diferentes(matriz : list, bandera : bool) -> bool:
         * `False` si la matriz contiene elementos repetidos.
     """
     
+    elementos = []
     # Se concatenan las listas de la matriz
-    elementos = list(chain(*matriz))
-    
+    for filas in matriz:
+        elementos += filas
+
     # Se comprueba si hay elementos repetidos en la matriz   
     if len(set(elementos)) != len(elementos):
 
         # Si hay elementos repetidos se retorna mensaje 
-        print("La matriz tiene elementos repetidos")
+        print("La matriz tiene elementos repetidos, no puede ser mágica")
 
         # Si hay elementos repetidos se detiene llamado de funciones
         return False
@@ -933,7 +877,6 @@ def suma_filas(matriz: list, bandera: bool) -> tuple:
  
     return bandera, suma_verificadora
 
-
 def calcular_suma_columnas(matriz : list, bandera : bool, 
                            suma_verificadora : float) -> bool:
     """
@@ -968,7 +911,6 @@ def calcular_suma_columnas(matriz : list, bandera : bool,
     
     return bandera
 
-
 def diagonal_mayor(matriz: list, bandera : bool, 
                    suma_verificadora : float) -> bool:
     """
@@ -999,7 +941,6 @@ def diagonal_mayor(matriz: list, bandera : bool,
         return False
     
     return bandera
-
   
 def diagonal_menor(matriz: list, bandera : bool, 
                    suma_verificadora : float) -> bool:
@@ -1041,7 +982,6 @@ def diagonal_menor(matriz: list, bandera : bool,
         return False
     
     return bandera
-
 
 if __name__ == "__main__":
     # Solicitud: número de filas y columnas de la matriz
