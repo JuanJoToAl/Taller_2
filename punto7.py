@@ -1,5 +1,6 @@
 # Punto 7
-# Se crean dos listas, la primera tendrá todos los elementos y la segunda los elementos con vocales
+# Se crean dos listas, la primera tendrá todos los elementos y la segunda los
+# elementos con vocales
 lista1 = []
 lista2 = []
 
@@ -24,7 +25,8 @@ for c in lista1:
             lista2.append(c)
             break
 
-# Se imprime la lista de elementos con 2 o más vocales, o un mensaje si no hay ninguno
+# Se imprime la lista de elementos con 2 o más vocales, o un mensaje si no hay
+# ninguno
 if lista2:
     print("Los elementos con 2 o más vocales son: " + str(lista2))
 else:

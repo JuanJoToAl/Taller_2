@@ -1,4 +1,4 @@
-1.
+# Punto 1
 #Se toma el número
 numero=int(input("Ingrese el número "))
 #Se determina una variable ´base´que nos ayudará a determinar cuántos dígitos tendrá el número
@@ -24,5 +24,4 @@ else:
     print("Los dígitos del número son:")
     print(lista)
 
-2.
 

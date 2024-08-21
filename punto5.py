@@ -1,3 +1,4 @@
+# Punto 5
 #Se piden los números
 numero1=int(input("Ingrese el primer número "))
 numero2=int(input("Ingrese el segundo número "))
