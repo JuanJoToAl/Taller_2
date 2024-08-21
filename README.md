@@ -180,9 +180,63 @@ except ValueError:
     print("Entrada inválida, por favor intente de nuevo")
 ```    
 3. Desarrollar un programa que permita ingresar dos números enteros y determinar si se tratan de números espejos, definiendo números espejos como dos números a y b tales que a se lee de izquierda a derecha igual que se lee b de derecha a izquierda, y viceversa.
- ```python
 
-```    
+ ```python
+# Punto 3
+# Se piden los números
+numero1 = int(input("Ingrese el primer número: "))
+numero2 = int(input("Ingrese el segundo número: "))
+
+# Se hace una lista con los dígitos de cada número
+lista1 = []
+lista2 = []
+
+# Para ahorrar tiempo, si los números son de 1 dígito y son iguales, significa que son espejo
+if numero1 == numero2 and numero1 < 10:
+    print("Los números son espejos")
+else:
+    # Determinación de la base
+    base1 = 10
+    base2 = 10
+
+    # Se llenan las listas con los dígitos de cada número
+    while base1 <= numero1:
+        base1 *= 10
+    while base1 > 1:
+        base1 //= 10  # Corrección: usar división entera
+        dig1 = numero1 // base1
+        lista1.append(dig1)
+        numero1 -= dig1 * base1
+
+    while base2 <= numero2:
+        base2 *= 10
+    while base2 > 1:
+        base2 //= 10  # Corrección: usar división entera
+        dig2 = numero2 // base2
+        lista2.append(dig2)
+        numero2 -= dig2 * base2
+
+    # Los números espejo deben tener la misma cantidad de dígitos, así que se descartan si las listas tienen diferente longitud
+    if len(lista1) != len(lista2):
+        print("Los números no son espejos")
+    else:
+        # Se crean variables para comparar los dígitos
+        ayuda = 0
+        elementos = len(lista2) - 1
+
+        # Comparar los dígitos de los números
+        while ayuda < len(lista1):
+            if lista1[ayuda] != lista2[elementos]:
+                print("Los números no son espejos")
+                break
+            ayuda += 1
+            elementos -= 1
+
+        # Si se recorren todos los dígitos y son iguales, los números son espejos
+        if ayuda == len(lista1):
+            print("Los números son espejos")
+```
+
 4. Diseñar una función que permita calcular una aproximación de la función coseno alrededor de 0 para cualquier valor x (real), utilizando los primeros n términos de la serie de Taylor. **nota:** use *math* para traer la función coseno y mostrar la diferencia entre el valor real y la aproximación. Calcule con cuántos términos de la serie (i.e: cuáles valores de n), se tienen errores del 10%, 1%, 0.1% y 0.001%.
 $$cos(x) \approx cos(x,n) \approx \sum_{i=0}^{n} (-1)^i \frac{x^{2i}}{(2i)!}$$
  ```python
@@ -275,8 +329,43 @@ except ValueError:
     print("Entrada inválida, por favor intente de nuevo")
 ``` 
 5. Desarrollar un programa que permita determinar el Minimo Comun Multiplo de dos numeros enteros. Abordar el problema desde una perpectiva tanto iterativa como recursiva. **Pista:** Puede ser de utilidad chequear el [Algoritmo de Euclides](https://es.wikipedia.org/wiki/Algoritmo_de_Euclides) para el cálculo del Máximo Común Divisor, y revisar cómo se relaciona este último con el Mínimo Común Múltiplo.
- ```python
 
+ ```python
+# Punto 5
+#Se piden los números
+numero1=int(input("Ingrese el primer número "))
+numero2=int(input("Ingrese el segundo número "))
+#Esta solución usa reiteración y recurción, así que se hacen las funciones
+def mcd1(numero1,numero2):
+    return numero1/numero2
+def mcd2(numero1,numero2):
+    return numero2/numero2
+#Luego se desarrolla el algoritmo de Euclides, tomando en cuenta cuál número es mayor
+if numero1>numero2:
+#Se llama la función
+    a=mcd1(numero1,numero2)
+    b=numero1//numero2
+#Se compara la división normal con la división exacta para saber si queda residuo o no
+    while a!=b:
+#Luego se reemplazan valores para seguir con el algoritmo hasta que no qude residuo
+        numero1=numero2
+        numero2=(a-b)*numero2
+        a=numero1/numero2
+        b=numero1//numero2
+#Cuando no se halla residuo, se imprime el resultado
+    print("El máximo común divisor de los números es "+str(numero2))
+#Se repite el proceso para cuando l segundo número es mayos que el primero
+else:
+    a=mcd2(numero2,numero1)
+    b=numero2//numero1
+    while a!=b:
+        numero2=numero1
+        numero1=(b-a)*numero1
+        a=numero2/numero1
+        b=numero2//numero1
+    print("El máximo común divisor de los números es "+str(numero1))
+
+#Posdata: El mínimo común múltiplo de 2 números siempre va a ser divisible exactamente entre el máximo común divisor
 ```
 
 6. Desarrollar un programa que determine si en una lista existen o no elementos repetidos. **Pista:** Maneje valores booleanos y utilice el operador *in*.
@@ -350,9 +439,43 @@ if __name__ == "__main__":
 ```
 
 7. Desarrollar un programa que determine si en una lista se encuentra una cadena de caracteres con dos o más vocales. Si la cadena existe debe imprimirla y si no existe debe imprimir 'No existe'.
-  ```python
 
-```    
+  ```python
+# Punto 7
+# Se crean dos listas, la primera tendrá todos los elementos y la segunda los
+# elementos con vocales
+lista1 = []
+lista2 = []
+
+# Se piden los elementos de la lista
+a = input("Ingrese los elementos de la lista, si no quiere más elementos, escriba 'parar': ")
+
+# Si no se escribe 'parar', el sistema seguirá añadiendo elementos
+while a != "parar":
+    lista1.append(a)
+    a = input("Ingrese los elementos de la lista, si no quiere más elementos, escriba 'parar': ")
+
+# Se recorren los elementos de la lista
+for c in lista1:
+    # Contador de vocales
+    b = 0
+    # Se cuenta el número de vocales en la cadena 'c'
+    for char in c:
+        if char in "aeiouAEIOU":
+            b += 1
+        # Si ya hay 2 o más vocales, se puede detener el conteo
+        if b >= 2:
+            lista2.append(c)
+            break
+
+# Se imprime la lista de elementos con 2 o más vocales, o un mensaje si no hay
+# ninguno
+if lista2:
+    print("Los elementos con 2 o más vocales son: " + str(lista2))
+else:
+    print("No existe")
+```
+
 8. Desarrollar un programa que dadas dos listas determine que elementos tiene la primer lista que no tenga la segunda lista. **Ejemplo:**
 <center>
 <table border="1">
