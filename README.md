@@ -17,30 +17,34 @@
 1. Desarrollar un programa que ingrese un número entero n y separe todos los digitos que componen el número. **Pista:** Utilice los operadores módulo (%) y división entera (//).
   ```python
 # Punto 1
-#Se toma el número
-numero=int(input("Ingrese el número "))
-#Se determina una variable ´base´que nos ayudará a determinar cuántos dígitos tendrá el número
-base=10
-#Se crea una lista para añadir los dígitos
-lista=[]
-#Para simplificar, se imprime el número directamente si es menor a 10
-if base>numero:
-    lista.append(numero)
-    print("El dígito del número es "+str(lista))
-#Si no es de un dígito, se multiplica la base por 10 hasta que sea igual o mayor a el número inscrito
-else:
-    while base<=numero:
-          base=base*10
-#Ahora, se divide el número en la base exactamente, se añade el número a la lista, se le quita el dígito al número y se divide en 10 la base, hasta que la base llegue a 1, lo que significa que es el último dígito
-    while base>=1:
-          dig=numero//base
-          lista.append(dig)
-          numero=numero-(dig*base)
-          base=base/10
-#De esta manera, siempre da un 0 como primer dígito, entonces se elimina de la lista antes de imprimirla
-    lista.pop(0)
-    print("Los dígitos del número son:")
-    print(lista)
+def digitos_numero(numero : int) -> None:
+    #Se determina una variable ´base´que nos ayudará a determinar cuántos dígitos tendrá el número
+    base=10
+    #Se crea una lista para añadir los dígitos
+    lista=[]
+    #Para simplificar, se imprime el número directamente si es menor a 10
+    if base>numero:
+        lista.append(numero)
+        print("El dígito del número es "+str(lista))
+    #Si no es de un dígito, se multiplica la base por 10 hasta que sea igual o mayor a el número inscrito
+    else:
+        while base<=numero:
+            base=base*10
+    #Ahora, se divide el número en la base exactamente, se añade el número a la lista, se le quita el dígito al número y se divide en 10 la base, hasta que la base llegue a 1, lo que significa que es el último dígito
+        while base>=1:
+            dig=numero//base
+            lista.append(dig)
+            numero=numero-(dig*base)
+            base=base/10
+    #De esta manera, siempre da un 0 como primer dígito, entonces se elimina de la lista antes de imprimirla
+        lista.pop(0)
+        print("Los dígitos del número son:")
+        print(lista)
+    return None
+if __name__ == "__main__":
+    #Se toma el número
+    numero=int(input("Ingrese el número "))
+    digitos_numero(numero)
 ``` 
 
 2. Desarrollar un programa que ingrese un número flotante n y separe su parte entera de la parte decimal, y luego entregue los dígitos tanto de la parte entera como de la decimal.
@@ -118,58 +122,62 @@ except ValueError:
 
  ```python
 # Punto 3
-# Se piden los números
-numero1 = int(input("Ingrese el primer número: "))
-numero2 = int(input("Ingrese el segundo número: "))
 
-# Se hace una lista con los dígitos de cada número
-lista1 = []
-lista2 = []
+def numeros_espejo(numero1 : int, numero2 : int) -> None:
+    # Se hace una lista con los dígitos de cada número
+    lista1 = []
+    lista2 = []
 
-# Para ahorrar tiempo, si los números son de 1 dígito y son iguales, significa que son espejo
-if numero1 == numero2 and numero1 < 10:
-    print("Los números son espejos")
-else:
-    # Determinación de la base
-    base1 = 10
-    base2 = 10
-
-    # Se llenan las listas con los dígitos de cada número
-    while base1 <= numero1:
-        base1 *= 10
-    while base1 > 1:
-        base1 //= 10  # Corrección: usar división entera
-        dig1 = numero1 // base1
-        lista1.append(dig1)
-        numero1 -= dig1 * base1
-
-    while base2 <= numero2:
-        base2 *= 10
-    while base2 > 1:
-        base2 //= 10  # Corrección: usar división entera
-        dig2 = numero2 // base2
-        lista2.append(dig2)
-        numero2 -= dig2 * base2
-
-    # Los números espejo deben tener la misma cantidad de dígitos, así que se descartan si las listas tienen diferente longitud
-    if len(lista1) != len(lista2):
-        print("Los números no son espejos")
+    # Para ahorrar tiempo, si los números son de 1 dígito y son iguales, significa que son espejo
+    if numero1 == numero2 and numero1 < 10:
+        print("Los números son espejos")
     else:
-        # Se crean variables para comparar los dígitos
-        ayuda = 0
-        elementos = len(lista2) - 1
+        # Determinación de la base
+        base1 = 10
+        base2 = 10
 
-        # Comparar los dígitos de los números
-        while ayuda < len(lista1):
-            if lista1[ayuda] != lista2[elementos]:
-                print("Los números no son espejos")
-                break
-            ayuda += 1
-            elementos -= 1
+        # Se llenan las listas con los dígitos de cada número
+        while base1 <= numero1:
+            base1 *= 10
+        while base1 > 1:
+            base1 //= 10  # Corrección: usar división entera
+            dig1 = numero1 // base1
+            lista1.append(dig1)
+            numero1 -= dig1 * base1
 
-        # Si se recorren todos los dígitos y son iguales, los números son espejos
-        if ayuda == len(lista1):
-            print("Los números son espejos")
+        while base2 <= numero2:
+            base2 *= 10
+        while base2 > 1:
+            base2 //= 10  # Corrección: usar división entera
+            dig2 = numero2 // base2
+            lista2.append(dig2)
+            numero2 -= dig2 * base2
+
+        # Los números espejo deben tener la misma cantidad de dígitos, así que se descartan si las listas tienen diferente longitud
+        if len(lista1) != len(lista2):
+            print("Los números no son espejos")
+        else:
+            # Se crean variables para comparar los dígitos
+            ayuda = 0
+            elementos = len(lista2) - 1
+
+            # Comparar los dígitos de los números
+            while ayuda < len(lista1):
+                if lista1[ayuda] != lista2[elementos]:
+                    print("Los números no son espejos")
+                    break
+                ayuda += 1
+                elementos -= 1
+
+            # Si se recorren todos los dígitos y son iguales, los números son espejos
+            if ayuda == len(lista1):
+                print("Los números son espejos")
+
+if __name__ == "__main__":
+    # Se piden los números
+    numero1 = int(input("Ingrese el primer número: "))
+    numero2 = int(input("Ingrese el segundo número: "))
+    numeros_espejo(numero1, numero2)
 ```
 
 4. Diseñar una función que permita calcular una aproximación de la función coseno alrededor de 0 para cualquier valor x (real), utilizando los primeros n términos de la serie de Taylor. **nota:** use *math* para traer la función coseno y mostrar la diferencia entre el valor real y la aproximación. Calcule con cuántos términos de la serie (i.e: cuáles valores de n), se tienen errores del 10%, 1%, 0.1% y 0.001%.
@@ -380,38 +388,48 @@ if __name__ == "__main__":
 
   ```python
 # Punto 7
-# Se crean dos listas, la primera tendrá todos los elementos y la segunda los
-# elementos con vocales
-lista1 = []
-lista2 = []
+def llenar_lista() -> list:
+    # Se crean dos listas, la primera tendrá todos los elementos y la segunda los
+    # elementos con vocales
+    lista1 = []
 
-# Se piden los elementos de la lista
-a = input("Ingrese los elementos de la lista, si no quiere más elementos, escriba 'parar': ")
-
-# Si no se escribe 'parar', el sistema seguirá añadiendo elementos
-while a != "parar":
-    lista1.append(a)
+    # Se piden los elementos de la lista
     a = input("Ingrese los elementos de la lista, si no quiere más elementos, escriba 'parar': ")
 
-# Se recorren los elementos de la lista
-for c in lista1:
-    # Contador de vocales
-    b = 0
-    # Se cuenta el número de vocales en la cadena 'c'
-    for char in c:
-        if char in "aeiouAEIOU":
-            b += 1
-        # Si ya hay 2 o más vocales, se puede detener el conteo
-        if b >= 2:
-            lista2.append(c)
-            break
+    # Si no se escribe 'parar', el sistema seguirá añadiendo elementos
+    while a != "parar":
+        lista1.append(a)
+        a = input("Ingrese los elementos de la lista, si no quiere más elementos, escriba 'parar': ")
 
-# Se imprime la lista de elementos con 2 o más vocales, o un mensaje si no hay
-# ninguno
-if lista2:
-    print("Los elementos con 2 o más vocales son: " + str(lista2))
-else:
-    print("No existe")
+    return lista1
+
+def mensaje_en_lista(lista1 : list) -> None:
+    lista2 = []
+    # Se recorren los elementos de la lista
+    for c in lista1:
+        # Contador de vocales
+        b = 0
+        # Se cuenta el número de vocales en la cadena 'c'
+        for char in c:
+            if char in "aeiouAEIOU":
+                b += 1
+            # Si ya hay 2 o más vocales, se puede detener el conteo
+            if b >= 2:
+                lista2.append(c)
+                break
+
+    # Se imprime la lista de elementos con 2 o más vocales, o un mensaje si no hay
+    # ninguno
+    if lista2:
+        print("Los elementos con 2 o más vocales son: " + str(lista2))
+    else:
+        print("No existe")
+    
+    return None
+
+if __name__ == "__main__":
+    lista1 = llenar_lista()
+    mensaje_en_lista(lista1)
 ```
 
 8. Desarrollar un programa que dadas dos listas determine que elementos tiene la primer lista que no tenga la segunda lista. **Ejemplo:**
