@@ -277,11 +277,78 @@ except ValueError:
 5. Desarrollar un programa que permita determinar el Minimo Comun Multiplo de dos numeros enteros. Abordar el problema desde una perpectiva tanto iterativa como recursiva. **Pista:** Puede ser de utilidad chequear el [Algoritmo de Euclides](https://es.wikipedia.org/wiki/Algoritmo_de_Euclides) para el cálculo del Máximo Común Divisor, y revisar cómo se relaciona este último con el Mínimo Común Múltiplo.
  ```python
 
-```   
-6. Desarrollar un programa que determine si en una lista existen o no elementos repetidos. **Pista:** Maneje valores booleanos y utilice el operador *in*.
-  ```python
+```
 
-```    
+6. Desarrollar un programa que determine si en una lista existen o no elementos repetidos. **Pista:** Maneje valores booleanos y utilice el operador *in*.
+
+  ```python
+# Punto 6
+
+def encontrar_numeros_repetidos():
+    """
+    Encuentra y muestra números repetidos introducidos por el usuario.
+
+    Args:
+        None
+
+    Returns:
+        None
+
+    El usuario introduce números repetidamente hasta que escribe 'fin'.
+    La función muestra la lista completa de números y los números repetidos
+    junto con su frecuencia.
+    """
+    
+    # Lista para almacenar los números introducidos por el usuario
+    numeros_repetidos = []
+    
+    # Diccionario para contar la frecuencia de cada número
+    frecuencia_numeros = {}
+    
+    # Bandera para controlar el bucle de entrada
+    terminar_proceso = False
+    
+    # Bucle para solicitar números hasta que el usuario decida terminar
+    while not terminar_proceso:
+        
+        # Solicita al usuario un número o 'fin' para terminar
+        inicio = input("Escriba un número o 'fin' para terminar y mostrar los números repetidos: ")
+        
+        # Verifica si el usuario desea terminar el proceso
+        if inicio.lower() == 'fin':
+            terminar_proceso = True
+        else:
+            try:
+                # Intenta convertir la entrada a un número flotante
+                n = float(inicio)
+                
+                # Agrega el número a la lista de números
+                numeros_repetidos.append(n)
+                
+                # Actualiza la frecuencia del número en el diccionario
+                if n in frecuencia_numeros:
+                    frecuencia_numeros[n] += 1
+                else:
+                    frecuencia_numeros[n] = 1
+            except ValueError:
+                # Informa al usuario si la entrada no es un número válido
+                print("Por favor, escriba un número válido.")
+    
+    # Muestra la lista completa de números introducidos
+    print(f"La lista de números es: {numeros_repetidos}")
+    
+    # Muestra los números repetidos y su frecuencia
+    print("Números repetidos: ")
+    for numero, frecuencia in frecuencia_numeros.items():
+        if frecuencia > 1:
+            # Imprime el número y la cantidad de veces que se repite
+            print(f"{numero} se repite {frecuencia} veces")
+
+# Ejecuta la función si el script es ejecutado directamente
+if __name__ == "__main__":
+    encontrar_numeros_repetidos()
+```
+
 7. Desarrollar un programa que determine si en una lista se encuentra una cadena de caracteres con dos o más vocales. Si la cadena existe debe imprimirla y si no existe debe imprimir 'No existe'.
   ```python
 
@@ -304,12 +371,208 @@ salida: [1, True]
 </center>
 
  ```python
+# Punto 8
 
-``` 
+def encontrar_diferencia_entre_listas():
+    """
+    Encuentra los elementos que están en la primera lista pero no en la
+    segunda.
+   
+    Args:
+        None
+
+    Returns:
+        None
+
+    Solicita al usuario que introduzca dos listas de elementos separados por
+    comas, y muestra los elementos que están en la primera lista y no en la
+    segunda.
+    """
+    diferencia = []  # Lista para almacenar los elementos únicos de lista1
+    
+    # Solicita al usuario elementos de primera lista y los convierte en lista
+
+    lista1 = input("Escribe los elementos de la primera lista separados por comas: ").split(',')
+   
+    # Solicita al usuario elementos de segunda lista y los convierte en lista
+    lista2 = input("Escribe los elementos de la segunda lista separados por comas: ").split(',')
+   
+    # Elimina espacios en blanco alrededor de cada elemento en ambas listas
+    lista1 = [elemento.strip() for elemento in lista1]
+    lista2 = [elemento.strip() for elemento in lista2]
+   
+    # Muestra los elementos de la primera lista
+    print(f"Elementos de la primera lista: {lista1}")
+   
+    # Muestra los elementos de la segunda lista
+    print(f"Elementos de la segunda lista: {lista2}")
+   
+    # Encuentra elementos que están en primera lista pero no en segunda
+    diferencia = [elemento for elemento in lista1 if elemento not in lista2]
+   
+    # Muestra los elementos que están en primera lista y no segunda
+    print(f"Los elementos que tiene la primera lista y que no tiene la segunda son: {diferencia}")
+
+# Ejecuta la función si el script es ejecutado directamente
+if __name__ == "__main__":
+    encontrar_diferencia_entre_listas()
+```
+
 9. Resolver el punto 7 del [taller 1](https://github.com/fegonzalez7/pdc_unal_clase8) usando operaciones con vectores.
+   
   ```python
+# Punto 9
 
-``` 
+def analizar_numeros():
+    """
+    Analiza una lista de números introducidos por el usuario, calculando
+    diversas métricas estadísticas y mostrando los resultados.
+    
+    Args:
+        None
+
+    Returns:
+        None
+
+    La función solicita cinco números al usuario, calcula y muestra el
+    promedio, la mediana, el promedio multiplicativo, ordena los números
+    en forma ascendente y descendente, y realiza cálculos adicionales.
+    """
+    
+    n = []  # Lista para almacenar los números introducidos por el usuario
+
+    # Solicita al usuario cinco números y los agrega a la lista n
+    for num in range(5):
+        num = float(input("Escribe un numero: "))
+        n.append(num)
+    
+    def Cal_promedio(n):
+        """
+        Calcula el promedio de una lista de números.
+
+        Args:
+            n (list of float): Lista de números.
+
+        Returns:
+            float: Promedio de los números en la lista.
+        """
+        return sum(n) / len(n)
+    
+    def cal_mediana(n):
+        """
+        Calcula la mediana de una lista de números.
+
+        Args:
+            n (list of float): Lista de números.
+
+        Returns:
+            float: Mediana de los números en la lista.
+        """
+        num_ordenados = sorted(n)  # Ordena la lista de números
+        n = len(num_ordenados)
+        if n % 2 == 0:
+            # Calcula la mediana para una lista de longitud par
+            return (num_ordenados[n // 2 - 1] + num_ordenados[n // 2]) / 2
+        else:
+            # Calcula la mediana para una lista de longitud impar
+            return num_ordenados[n // 2]
+    
+    def cal_promedio_multiplicativo(n):
+        """
+        Calcula el promedio multiplicativo de una lista de números.
+
+        Args:
+            n (list of float): Lista de números.
+
+        Returns:
+            float: Promedio multiplicativo de los números en la lista.
+        """
+        prod = 1
+        for num in n:
+            prod *= num  # Multiplica todos los números
+        return prod ** (1 / len(n))  # Calcula la raíz enésima del producto
+    
+    def orden_ascen(n):
+        """
+        Ordena la lista de números en orden ascendente.
+
+        Args:
+            n (list of float): Lista de números.
+
+        Returns:
+            list of float: Lista de números ordenada en forma ascendente.
+        """
+        return sorted(n)
+    
+    def ordenar_descen(n):
+        """
+        Ordena la lista de números en orden descendente.
+
+        Args:
+            n (list of float): Lista de números.
+
+        Returns:
+            list of float: Lista de números ordenada en forma descendente.
+        """
+        return sorted(n, reverse=True)
+    
+    def cal_potencia(n):
+        """
+        Calcula la potencia del mayor número elevado al menor número en la
+        lista.
+
+        Args:
+            n (list of float): Lista de números.
+
+        Returns:
+            float: Potencia del mayor número elevado al menor número.
+        """
+        maximo = max(n)  # Encuentra el número máximo
+        minimo = min(n)  # Encuentra el número mínimo
+        return maximo ** minimo  # Calcula la potencia
+    
+    def cal_raiz_cubica_menor(n):
+        """
+        Calcula la raíz cúbica del menor número en la lista.
+
+        Args:
+            n (list of float): Lista de números.
+
+        Returns:
+            float: Raíz cúbica del menor número en la lista.
+        """
+        minimo = min(n)  # Encuentra el número mínimo
+        return minimo ** (1/3)  # Calcula la raíz cúbica
+    
+    # Muestra los números introducidos por el usuario
+    print(f"Los números escritos son: {n}")
+    
+    # Muestra el promedio de los números
+    print(f"El promedio es: {Cal_promedio(n)}")
+    
+    # Muestra la mediana de los números
+    print(f"La mediana es: {cal_mediana(n)}")
+    
+    # Muestra el promedio multiplicativo de los números
+    print(f"El promedio multiplicativo es: {cal_promedio_multiplicativo(n)}")
+    
+    # Muestra los números en orden ascendente
+    print(f"Los números en orden ascendente son: {orden_ascen(n)}")
+    
+    # Muestra los números en orden descendente
+    print(f"Los números en orden descendente son: {ordenar_descen(n)}")
+    
+    # Muestra la potencia del mayor número elevado al menor número
+    print(f"La potencia del mayor número elevado al menor número es: {cal_potencia(n)}")
+    
+    # Muestra la raíz cúbica del menor número
+    print(f"La raíz cúbica del menor número es: {cal_raiz_cubica_menor(n)}")
+
+# Ejecuta la función si el script es ejecutado directamente
+if __name__ == "__main__":
+    analizar_numeros()
+```
+
 10. Suponga que se tiene una lista A con ciertos números enteros. Desarrolle una función que, independientemente de los números que se encuentran en la lista A, tome aquellos números que son múltiplos de 3 y los guarde en una lista nueva, la cual debe ser **retornada** por la función. Implemente la perspectiva de un *patrón de acumulación* y también de *comprensión de listas*. **Desafío:** Si ya lo logró, inténtelo ahora sin utilizar el módulo (%). **Pista:** Un número es multiplo de 3 si la suma de sus dígitos también lo es, ¿verdad?
     
  ```python
