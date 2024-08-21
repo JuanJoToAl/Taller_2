@@ -311,6 +311,7 @@ salida: [1, True]
 
 ``` 
 10. Suponga que se tiene una lista A con ciertos números enteros. Desarrolle una función que, independientemente de los números que se encuentran en la lista A, tome aquellos números que son múltiplos de 3 y los guarde en una lista nueva, la cual debe ser **retornada** por la función. Implemente la perspectiva de un *patrón de acumulación* y también de *comprensión de listas*. **Desafío:** Si ya lo logró, inténtelo ahora sin utilizar el módulo (%). **Pista:** Un número es multiplo de 3 si la suma de sus dígitos también lo es, ¿verdad?
+    
  ```python
 # Se declara e inicializa la lista
 lista_numeros : list = []
@@ -321,40 +322,40 @@ numero : str
 bandera : bool = True
 
 def agregar_numeros(bandera, lista_numeros : list) -> list:
-    """
-    La función permite ingresa números enteros a una lista hasta que el 
-    usuario ingrese la palabra "parar" (o "Parar") en minúscula.
+   """
+   La función permite ingresa números enteros a una lista hasta que el 
+   usuario ingrese la palabra "parar" (o "Parar") en minúscula.
 
-    Args:
-        lista_numeros (list): Lista donde se almacenarán los números 
-        ingresados por el usuario. 
+   Args:
+       lista_numeros (list): Lista donde se almacenarán los números 
+       ingresados por el usuario. 
 
-    Returns:
-        Se retorna lista que contiene todos los números enteros 
-        ingresados por el usuario. 
-    """
-    
-    # Se agregan números a la lista hasta ingresar "parar" o "Parar"
-    while bandera:
-        numero = str(input("Ingrese números enteros o parar para deternerel ciclo"))
-        if numero.lower() == "parar":
-            bandera = False
-        else:
-            lista_numeros.append(int(numero))
+   Returns:
+       Se retorna lista que contiene todos los números enteros 
+       ingresados por el usuario. 
+   """
+   
+   # Se agregan números a la lista hasta ingresar "parar" o "Parar"
+   while bandera:
+       numero = str(input("Ingrese números enteros o parar para deternerel ciclo"))
+       if numero.lower() == "parar":
+           bandera = False
+       else:
+           lista_numeros.append(int(numero))
 
-    return lista_numeros
+   return lista_numeros
 
 if __name__ == "__main__":
 
-    lista_numeros = agregar_numeros(bandera, lista_numeros)
-    # Se verifica cuáles números de la lista son múltiplos de 3
-    lista_multiplos = [x for x in lista_numeros if x % 3 == 0]
+   lista_numeros = agregar_numeros(bandera, lista_numeros)
+   # Se verifica cuáles números de la lista son múltiplos de 3
+   lista_multiplos = [x for x in lista_numeros if x % 3 == 0]
 
-    # Se imprime la lista con los números ingresados
-    print(f"La lista con los números ingresados es: {lista_numeros}")
-    
-    # Se imprime la lista con los múltiplos de 3 de la lista "lista_numeros"
-    print(f"Lista con los números ingresados múltiplos de 3: {lista_multiplos}")
+   # Se imprime la lista con los números ingresados
+   print(f"La lista con los números ingresados es: {lista_numeros}")
+   
+   # Se imprime la lista con los múltiplos de 3 de la lista "lista_numeros"
+   print(f"Lista con los números ingresados múltiplos de 3 (usando el módulo): {lista_multiplos}")
 
 #La manera sin ¨%¨
 
@@ -370,60 +371,61 @@ numero : str
 bandera : bool = True
 
 def agregar_numeros(bandera : bool, lista_numeros : list) -> list:
-    """
-    La función permite ingresar números enteros a una lista hasta 
-    que el usuario ingrese la palabra "parar" (o "Parar") en minúscula.
+   """
+   La función permite ingresar números enteros a una lista hasta 
+   que el usuario ingrese la palabra "parar" (o "Parar") en minúscula.
 
-    Args:
-        bandera (bool): Controla la ejecución del bucle `while`. 
-        
-        lista_numeros (list): Almacena los números ingresados por el usuario. 
+   Args:
+       bandera (bool): Controla la ejecución del bucle `while`. 
+       
+       lista_numeros (list): Almacena los números ingresados por el usuario. 
 
-    Returns:
-    Lista que contiene todos los números enteros ingresados por el usuario. 
-    """
+   Returns:
+   Lista que contiene todos los números enteros ingresados por el usuario. 
+   """
 
-    # Se agregan enteros a la lista hasta ingresar "parar" o "Parar"
-    while bandera:
-        numero = str(input("Ingrese números enteros o parar para deternerel ciclo"))
-        if numero.lower() == "parar":
-            bandera = False
-        else:
-            lista_numeros.append(int(numero))
-    
-    return lista_numeros
+   # Se agregan enteros a la lista hasta ingresar "parar" o "Parar"
+   while bandera:
+       numero = str(input("Ingrese números enteros o parar para deternerel ciclo"))
+       if numero.lower() == "parar":
+           bandera = False
+       else:
+           lista_numeros.append(int(numero))
+   
+   return lista_numeros
 
 def multiplos(lista_numeros : list) -> list:
-    """ 
-    La función identifica y filtra los números múltiplos 
-    de 3 dentro de una lista.
+   """ 
+   La función identifica y filtra los números múltiplos 
+   de 3 dentro de una lista.
 
-    Args:
-        lista_numeros (list): Lista que contiene números enteros.
+   Args:
+       lista_numeros (list): Lista que contiene números enteros.
 
-    Returns:
-        Lista que contiene solo los números múltiplos de 3 que se 
-        encontraron en `lista_numeros`.
-    """
+   Returns:
+       Lista que contiene solo los números múltiplos de 3 que se 
+       encontraron en `lista_numeros`.
+   """
 
-    # Se elementos de "lista_numeros" y se agregan a "lista_multiplos" 
-    lista_multiplos = [x for x in lista_numeros if sum(separar_entero(x, [])) 
-                       // 3 * 3 == sum(separar_entero(x, []))]
-    
-    return lista_multiplos
+   # Se elementos de "lista_numeros" y se agregan a "lista_multiplos" 
+   lista_multiplos = [x for x in lista_numeros if sum(separar_entero(x, [])) 
+                      // 3 * 3 == sum(separar_entero(x, []))]
+   
+   return lista_multiplos
 
 if __name__ == "__main__":
-    lista_numeros = agregar_numeros(bandera, lista_numeros)
+   lista_numeros = agregar_numeros(bandera, lista_numeros)
 
-    # Se verifica cuáles números de la lista son múltiplos de 3
-    lista_multiplos = multiplos(lista_numeros) 
+   # Se verifica cuáles números de la lista son múltiplos de 3
+   lista_multiplos = multiplos(lista_numeros) 
 
 # Se imprime la lista con los números ingresados
 print(f"La lista con los números ingresados es: {lista_numeros}")
 
 # Se imprime la lista con los múltiplos de 3 de la lista "lista_numeros"
-print(f"Lista con los números ingresados múltiplos de 3: {lista_multiplos}"
+print(f"Lista con los números ingresados múltiplos de 3 (sin usar el módulo): {lista_multiplos}")
 ```
+
 ### Bono
 11. Desarrollar un algoritmo que determine si una matriz es mágica. Se dice que una matriz cuadrada es mágica si la suma de cada una de sus filas, de cada una de sus columnas y de cada diagonal es igual.
  ```python
